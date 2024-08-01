@@ -1,0 +1,27 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  env-setting:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Checkout Repo'
+        uses: actions/checkout@v4
+      - name: 'use Node'
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      - name: 'Install Vercel CLI'
+        run: npm install -g vercel@latest
+      - name: 'ADD ENV'
+        run: vercel env add VITE_MODE preview ${{ github.ref_name }} -y <<< ${{ github.ref_name }}
+      - name: 'ENV SET'
+        run: vercel pull --yes environment=preview
+      - name: 'BUILD'
+        run: vercel
+      - name: 'REMOVE ENV'
+        run: vercel env rm VITE_MODE ${{ github.ref_name }} -y
