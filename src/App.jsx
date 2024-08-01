@@ -60,6 +60,7 @@ const JoB = () => {
 function App() {
     return (
         <>
+            <strong>VITE_MODE: {import.meta.env.VITE_MODE}</strong>
             <h3>Zustand</h3>
             <ZuA/>
             <ZuB/>
