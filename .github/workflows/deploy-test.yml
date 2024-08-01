@@ -11,17 +11,36 @@ jobs:
     steps:
       - name: 'Checkout Repo'
         uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - name: 'use Node'
         uses: actions/setup-node@v2
         with:
           node-version: '20'
+          cache: 'pnpm'
       - name: 'Install Vercel CLI'
         run: npm install -g vercel@latest
       - name: 'ADD ENV'
-        run: vercel env add VITE_MODE preview ${{ github.ref_name }} -y <<< ${{ github.ref_name }}
+        run: vercel env add VITE_MODE preview ${{ github.ref_name }} --token=${{ secrets.VERCEL_TOKEN }} -y <<< ${{ github.ref_name }}
+        env:
+          VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
+          VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ
       - name: 'ENV SET'
-        run: vercel pull --yes environment=preview
+        run: vercel pull --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --yes
+        env:
+          VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
+          VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ
       - name: 'BUILD'
-        run: vercel
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
+          VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ
+      - name: 'DEPLOY'
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
+          VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ
       - name: 'REMOVE ENV'
-        run: vercel env rm VITE_MODE ${{ github.ref_name }} -y
+        run: vercel env rm VITE_MODE preview ${{ github.ref_name }} --token=${{ secrets.VERCEL_TOKEN }} -y
+        env:
+          VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
+          VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ

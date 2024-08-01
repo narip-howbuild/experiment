@@ -57,9 +57,12 @@ const JoB = () => {
     )
 }
 
+console.log(import.meta)
+
 function App() {
     return (
         <>
+            <div>1차시도 staging-test-</div>
             <strong>VITE_MODE: {import.meta.env.VITE_MODE}</strong>
             <h3>Zustand</h3>
             <ZuA/>
