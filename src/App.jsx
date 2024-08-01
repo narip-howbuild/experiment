@@ -1,5 +1,5 @@
 import {useZustandA, useZustandB} from "./useZustand.js";
-import {atom, useAtomValue, useSetAtom, useAtom} from 'jotai';
+import {atom, useSetAtom, useAtom} from 'jotai';
 
 
 const ZuA = () => {
@@ -17,7 +17,7 @@ const ZuA = () => {
 const ZuB = () => {
     const {b, setB} = useZustandB();
 
-    console.log("b rendering")
+    console.log("b rendering!")
 
     return (<section style={{backgroundColor: 'tan', padding: 8}}>
         <div>{b}</div>
