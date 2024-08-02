@@ -39,8 +39,8 @@ jobs:
         env:
           VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
           VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ
-      - name: 'REMOVE ENV'
-        run: vercel env rm VITE_MODE preview ${{ github.ref_name }} --token=${{ secrets.VERCEL_TOKEN }} -y
-        env:
-          VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
-          VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ
+#      - name: 'REMOVE ENV'
+#        run: vercel env rm VITE_MODE preview ${{ github.ref_name }} --token=${{ secrets.VERCEL_TOKEN }} -y
+#        env:
+#          VERCEL_ORG_ID: team_AuMv8Aq9LJSmza6909keGdk0
+#          VERCEL_PROJECT_ID: prj_VVyDyPj15VUE4dazRVHxT0W9AHcZ
